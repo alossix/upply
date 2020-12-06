@@ -1,65 +1,66 @@
-import Link from 'next/link'
-import dbConnect from '../utils/dbConnect'
-import Pet from '../models/Pet'
+import React from "react";
 
-const Index = ({ pets }) => (
-  <>
-    {/* Create a card for each pet */}
-    {pets.map((pet) => (
-      <div key={pet._id}>
-        <div className="card">
-          <img src={pet.image_url} />
-          <h5 className="pet-name">{pet.name}</h5>
-          <div className="main-content">
-            <p className="pet-name">{pet.name}</p>
-            <p className="owner">Owner: {pet.owner_name}</p>
+const index = () => {
+  return <div>Test title page!</div>;
+};
 
-            {/* Extra Pet Info: Likes and Dislikes */}
-            <div className="likes info">
-              <p className="label">Likes</p>
-              <ul>
-                {pet.likes.map((data, index) => (
-                  <li key={index}>{data} </li>
-                ))}
-              </ul>
-            </div>
-            <div className="dislikes info">
-              <p className="label">Dislikes</p>
-              <ul>
-                {pet.dislikes.map((data, index) => (
-                  <li key={index}>{data} </li>
-                ))}
-              </ul>
-            </div>
+export default index;
 
-            <div className="btn-container">
-              <Link href="/[id]/edit" as={`/${pet._id}/edit`}>
-                <button className="btn edit">Edit</button>
-              </Link>
-              <Link href="/[id]" as={`/${pet._id}`}>
-                <button className="btn view">View</button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    ))}
-  </>
-)
+// import Link from "next/link";
+// import dbConnect from "../utils/dbConnect";
+// import Company from "../models/Company.model";
 
-/* Retrieves pet(s) data from mongodb database */
-export async function getServerSideProps() {
-  await dbConnect()
+// const Index = ({ companies }) => (
+//   <>
+//     {companies.map((company) => (
+//       <div key={company._id}>
+//         <div className="card">
+//           <img src={company.logoUrl} />
+//           <h5 className="company-name">{company.companyName}</h5>
+//           <div className="main-content">
+//             <div className="company-info">
+//               <p className="pros-list">List of Pros</p>
+//               <ul>
+//                 {company.prosList.map((pro, index) => (
+//                   <li key={index}>{pro}</li>
+//                 ))}
+//               </ul>
+//               <p className="cons-list">List of Cons</p>
+//               <ul>
+//                 {company.consList.map((con, index) => (
+//                   <li key={index}>{con}</li>
+//                 ))}
+//               </ul>
+//             </div>
 
-  /* find all the data in our database */
-  const result = await Pet.find({})
-  const pets = result.map((doc) => {
-    const pet = doc.toObject()
-    pet._id = pet._id.toString()
-    return pet
-  })
+//             <div className="btn-container">
+//               <Link href="/[id]/edit" as={`/${pet._id}/edit`}>
+//                 <button className="btn edit">Edit</button>
+//               </Link>
+//               <Link href="/[id]" as={`/${pet._id}`}>
+//                 <button className="btn view">View</button>
+//               </Link>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     ))}
+//   </>
+// );
 
-  return { props: { pets: pets } }
-}
+// /* Retrieves company data from mongodb database */
+// export async function getServerSideProps() {
+//   await dbConnect();
 
-export default Index
+//   /* find all the data in our database */
+//   const result = await Company.find({});
+//   const companies = result.map((doc) => {
+//     const company = doc.toObject();
+//     company._id = company._id.toString();
+//     return company;
+//   });
+
+//   return { props: { companies: companies } };
+// }
+
+// export default Index;
