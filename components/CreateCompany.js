@@ -9,7 +9,7 @@ const CreateCompany = () => {
 
   const formSubmitHandler = async (event) => {
     event.preventDefault();
-    const formSubmit = await axios.post("http://localhost:3000/api/company", {
+    const formSubmit = await axios.post("https://upply.work/api/company", {
       companyName,
       companyLocation,
       companyUrl,
