@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useFetchUser } from "../lib/user";
 
 const CreateCompany = () => {
   const [companyName, setCompanyName] = useState("");
   const [companyLocation, setCompanyLocation] = useState("");
   const [companyUrl, setCompanyUrl] = useState();
   const [logoUrl, setLogoUrl] = useState("https://upply.work/office.png");
+  const { user, loading } = useFetchUser({ required: true });
+  console.log(user);
 
   const formSubmitHandler = async (event) => {
     event.preventDefault();
