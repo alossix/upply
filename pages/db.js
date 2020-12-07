@@ -24,6 +24,7 @@ const db = () => {
             onChange={(e) => setFirstName(e.target.value)}
           ></input>
         </label>
+        <img src="jobhunt.png" alt="upply"></img>
         <button type="submit">Submit</button>
       </form>
     </div>
