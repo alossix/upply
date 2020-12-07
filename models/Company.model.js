@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const CompanySchema = new mongoose.Schema({
   userIdFromAuth0: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
   },
   companyName: {
     type: String,
@@ -35,6 +35,7 @@ const CompanySchema = new mongoose.Schema({
       message: `Please provide a valid URL.`,
     },
   },
+  jobs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Job" }],
   added: {
     type: Date,
     default: Date.now,

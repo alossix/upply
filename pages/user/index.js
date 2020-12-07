@@ -8,12 +8,9 @@ function ProfileCard({ user }) {
   console.log(user);
   return (
     <>
-      <h1>Profile</h1>
-      <h2>Rich Text Profile Page Test</h2>
-
+      <h1>Your User Profile</h1>
       <div>
-        <h3>Profile (client rendered)</h3>
-        <img src={user.picture} alt="user picture" />
+        <img src={user.picture} alt={user.name} />
         <p>nickname: {user.nickname}</p>
         <p>name: {user.name}</p>
         <Link href="/user/stack">

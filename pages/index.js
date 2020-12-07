@@ -28,6 +28,7 @@ function Home() {
           <img src={user.picture} alt="user picture" />
           <p>nickname: {user.nickname}</p>
           <p>name: {user.name}</p>
+          <p>id: {user.identities}</p>
         </>
       )}
     </Layout>

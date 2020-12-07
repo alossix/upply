@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
+  userIdFromAuth0: {
+    type: String,
+  },
   email: {
     type: String,
     required: true,
@@ -17,11 +20,6 @@ const UserSchema = new mongoose.Schema({
   },
   trackedCompanies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Company" }],
   trackedJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Job" }],
-  hashedPassword: {
-    type: String,
-    required: true,
-  },
 });
 
-const User = mongoose.model("User", UserSchema);
-module.exports = User;
+export default mongoose.models.User || mongoose.model("User", UserSchema);
