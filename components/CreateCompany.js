@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useFetchUser } from "../lib/user";
 
@@ -7,8 +7,8 @@ const CreateCompany = () => {
   const [companyLocation, setCompanyLocation] = useState("");
   const [companyUrl, setCompanyUrl] = useState();
   const [logoUrl, setLogoUrl] = useState("https://upply.work/office.png");
-  const { user, loading } = useFetchUser({ required: true });
-  console.log(user.identities.user_id);
+
+  const user = useFetchUser({ required: true });
   const userIdFromAuth0 = user.identities.user_id;
 
   const formSubmitHandler = async (event) => {
