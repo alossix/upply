@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
 
 const CompanySchema = new mongoose.Schema({
+  userIdFromAuth0: {
+    type: mongoose.Schema.Types.ObjectId,
+  },
   companyName: {
     type: String,
     index: true,

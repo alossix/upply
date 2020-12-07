@@ -8,7 +8,8 @@ const CreateCompany = () => {
   const [companyUrl, setCompanyUrl] = useState();
   const [logoUrl, setLogoUrl] = useState("https://upply.work/office.png");
   const { user, loading } = useFetchUser({ required: true });
-  console.log(user);
+  console.log(user.identities.user_id);
+  const userIdFromAuth0 = user.identities.user_id;
 
   const formSubmitHandler = async (event) => {
     event.preventDefault();
@@ -17,6 +18,7 @@ const CreateCompany = () => {
       companyLocation,
       companyUrl,
       logoUrl,
+      userIdFromAuth0,
     });
   };
 
