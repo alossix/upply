@@ -1,7 +1,8 @@
 // This import is only needed when checking authentication status directly from getInitialProps
 // import auth0 from '../lib/auth0'
-import { useFetchUser } from "../lib/user";
-import Layout from "../components/layout";
+import { useFetchUser } from "../../lib/user";
+import Layout from "../../components/layout";
+import Link from "next/link";
 
 function ProfileCard({ user }) {
   console.log(user);
@@ -15,6 +16,9 @@ function ProfileCard({ user }) {
         <img src={user.picture} alt="user picture" />
         <p>nickname: {user.nickname}</p>
         <p>name: {user.name}</p>
+        <Link href="/user/stack">
+          <a>See your stack of applications</a>
+        </Link>
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const CompanySchema = new mongoose.Schema({
   companyName: {
@@ -15,8 +15,8 @@ const CompanySchema = new mongoose.Schema({
     validate: {
       validator: function (value) {
         const urlPattern = /(http|https):\/\/(\w+:{0,1}\w*#)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%#!\-/]))?/;
-        const urlRegExp = new RegExp(urlPattern);
-        return value.match(urlRegExp);
+        // const urlRegExp = new RegExp(urlPattern);
+        return value == null || urlPattern.test(value);
       },
       message: `Please provide a valid URL.`,
     },
@@ -26,12 +26,11 @@ const CompanySchema = new mongoose.Schema({
     validate: {
       validator: function (value) {
         const urlPattern = /(http|https):\/\/(\w+:{0,1}\w*#)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%#!\-/]))?/;
-        const urlRegExp = new RegExp(urlPattern);
-        return value.match(urlRegExp);
+        // const urlRegExp = new RegExp(urlPattern);
+        return value == null || urlPattern.test(value);
       },
       message: `Please provide a valid URL.`,
     },
-    default: "/office.png",
   },
   added: {
     type: Date,
@@ -39,5 +38,5 @@ const CompanySchema = new mongoose.Schema({
   },
 });
 
-const Company = mongoose.model("Company", CompanySchema);
-module.exports = Company;
+export default mongoose.models.Company ||
+  mongoose.model("Company", CompanySchema);
