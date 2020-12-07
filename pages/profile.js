@@ -7,7 +7,7 @@ function ProfileCard({ user }) {
   return (
     <>
       <h1>Profile</h1>
-      <h2>Rich Text Profile Page</h2>
+      <h2>Rich Text Profile Page Test</h2>
 
       <div>
         <h3>Profile (client rendered)</h3>
