@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from "next/link";
 
 function Header({ user, loading }) {
   return (
@@ -19,13 +19,8 @@ function Header({ user, loading }) {
             (user ? (
               <>
                 <li>
-                  <Link href="/profile">
-                    <a>Client-rendered profile</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/advanced/ssr-profile">
-                    <a>Server rendered profile (advanced)</a>
+                  <Link href="/user">
+                    <a>Your Profile</a>
                   </Link>
                 </li>
                 <li>
@@ -75,7 +70,7 @@ function Header({ user, loading }) {
         }
       `}</style>
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;
