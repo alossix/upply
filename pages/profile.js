@@ -4,6 +4,7 @@ import { useFetchUser } from "../lib/user";
 import Layout from "../components/layout";
 
 function ProfileCard({ user }) {
+  console.log(user);
   return (
     <>
       <h1>Profile</h1>
