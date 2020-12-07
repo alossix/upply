@@ -4,7 +4,7 @@ import { useFetchUser } from "../lib/user";
 
 const db = () => {
   const [firstName, setFirstName] = useState("");
-  const { user } = useFetchUser({ required: true });
+  const { user, loading } = useFetchUser({ required: true });
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -27,7 +27,7 @@ const db = () => {
           ></input>
         </label>
         <img src="jobhunt.png" alt="upply"></img>
-        <h2>{user.family_name}</h2>
+        {loading ? <>Loading...</> : <h2>{user.family_name}</h2>}
         <button type="submit">Submit</button>
       </form>
     </div>
