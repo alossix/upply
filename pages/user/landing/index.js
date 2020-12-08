@@ -2,6 +2,7 @@ import { useFetchUser } from "../../../lib/user";
 import Layout from "../../../components/layout";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Router from "next/router";
 
 const indexLanding = () => {
   const { user, loading } = useFetchUser({ required: true });
@@ -12,39 +13,37 @@ const indexLanding = () => {
 
   const H3Component = ({ user }) => {
     setUserIdFromAuth0(user.sub);
-    return <h3>Please edit your user details...</h3>;
+    setEmail(user.name);
+    return <h3>Please edit your user details {user.name}...</h3>;
   };
 
   const formSubmitHandler = async (event) => {
     event.preventDefault();
-    console.log(userIdFromAuth0);
     // const formSubmit = await axios.post("https://upply.work/api/company", {
-    const formSubmit = await axios.post("http://localhost:3000/api/user", {
-      userIdFromAuth0,
-      email,
-      firstName,
-      lastName,
-    });
+    const formSubmit = await axios
+      .post("http://localhost:3000/api/user", {
+        userIdFromAuth0,
+        email,
+        firstName,
+        lastName,
+      })
+      .then((res) => {
+        console.log(res);
+        Router.push("/user/stack");
+      })
+      .catch((err) => console.error(err));
   };
 
   return (
     <Layout user={user} loading={loading}>
       <div className="landing-page-form">
         {loading ? (
-          <>Please edit your user details...</>
+          <h3>Please edit your user details...</h3>
         ) : (
           <H3Component user={user} />
         )}
         <form onSubmit={formSubmitHandler}>
           <input type="hidden" value={userIdFromAuth0}></input>
-          <label>
-            Email address:
-            <input
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            ></input>
-          </label>
           <label>
             First name:
             <input

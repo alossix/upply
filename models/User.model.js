@@ -18,8 +18,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  trackedCompanies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Company" }],
-  trackedJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Job" }],
+  jobStack: [{ type: mongoose.Schema.Types.ObjectId, ref: "Job" }],
 });
 
 export default mongoose.models.User || mongoose.model("User", UserSchema);

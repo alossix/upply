@@ -29,7 +29,7 @@ function Header({ user, loading }) {
               </>
             ) : (
               <li>
-                <a href="/api/login">Login</a>
+                <a href="/api/login">Login or Sign Up</a>
               </li>
             ))}
         </ul>

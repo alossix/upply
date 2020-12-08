@@ -1,23 +1,26 @@
 import React, { useState, useEffect } from "react";
-import CreateCompany from "../../../components/CreateCompany";
+import CreateJob from "../../../components/CreateJob";
 import { useFetchUser } from "../../../lib/user";
+import Layout from "../../../components/layout";
 
-const ShowStack = (props) => {
-  return <CreateCompany user={props.user} />;
-};
+// const ShowStack = (props) => {
+//   return <CreateJob user={props.user} />;
+// };
 
 const indexStack = (props) => {
   const [stackState, setStackState] = useState(false);
-  const { user } = useFetchUser();
+  const { user, loading } = useFetchUser();
 
   return (
-    <div className="stack">
-      <h2>Your Stack</h2>
-      <h3 onClick={() => setStackState(true)}>
-        Add new company or job listing
-      </h3>
-      {stackState ? <ShowStack user={user} /> : null}
-    </div>
+    <Layout user={user} loading={loading}>
+      <div className="stack">
+        <h2>Your Stack</h2>
+        <h3 onClick={() => setStackState(true)}>
+          Add new company or job listing
+        </h3>
+        {stackState ? <CreateJob user={user} /> : null}
+      </div>
+    </Layout>
   );
 };
 
