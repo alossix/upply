@@ -140,6 +140,9 @@ const CreateJob = (props) => {
       </form>
       <style jsx>
         {`
+          .stack-form {
+            padding: 1rem;
+          }
           .stack-form form {
             display: flex;
             flex-direction: column;

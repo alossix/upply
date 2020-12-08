@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const UserSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   userIdFromAuth0: {
     type: String,
   },
@@ -21,4 +21,5 @@ const UserSchema = new mongoose.Schema({
   jobStack: [{ type: mongoose.Schema.Types.ObjectId, ref: "Job" }],
 });
 
-export default mongoose.models.User || mongoose.model("User", UserSchema);
+const User = mongoose.models.User || mongoose.model("User", userSchema);
+export default User;
