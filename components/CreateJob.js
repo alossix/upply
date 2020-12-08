@@ -32,6 +32,7 @@ const CreateJob = (props) => {
   return (
     <div className="stack-form">
       <h3>Add Company and Job Info</h3>
+      <h3>Your ID: {userIdFromAuth0}</h3>
       <form onSubmit={formSubmitHandler}>
         <label>
           Job Title: * <br />

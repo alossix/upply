@@ -1,5 +1,6 @@
 import dbConnect from "../../../configs/dbConnect";
-import User from "../../../models/User.model";
+import mongoose from "mongoose";
+const User = mongoose.model("user");
 
 export default async function userHandler(req, res) {
   const { method } = req;
