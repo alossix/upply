@@ -1,6 +1,6 @@
 import { useFetchUser } from "../../../lib/user";
 import Layout from "../../../components/layout";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Router from "next/router";
 

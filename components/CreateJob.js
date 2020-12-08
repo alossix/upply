@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 const CreateJob = (props) => {
@@ -13,10 +13,10 @@ const CreateJob = (props) => {
   const [bookmarked, setBookmarked] = useState(false);
   const [notes, setNotes] = useState([]);
 
-  const formSubmitHandler = async (event) => {
+  const formSubmitHandler = (event) => {
     event.preventDefault();
-    // const formSubmit = await axios.post("https://upply.work/api/job", {
-    const formSubmit = await axios.post("http://localhost:3000/api/job", {
+    // axios.post("https://upply.work/api/job", {
+    axios.post("http://localhost:3000/api/job", {
       userIdFromAuth0,
       jobTitle,
       companyName,
