@@ -10,11 +10,6 @@ function Header({ user, loading }) {
               <a>Home</a>
             </Link>
           </li>
-          <li>
-            <Link href="/about">
-              <a>About</a>
-            </Link>
-          </li>
           {!loading &&
             (user ? (
               <>

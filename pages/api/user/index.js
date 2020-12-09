@@ -3,25 +3,20 @@ import mongoose from "mongoose";
 const User = mongoose.model("user");
 
 export default async function userHandler(req, res) {
-  const { method } = req;
-
   await dbConnect();
-
-  console.log(req.body);
-
-  if (method === "GET") {
-    try {
-      const userInfo = await User.findOne({});
-      res.status(200).json({ success: true, data: userInfo });
-    } catch {
-      (err) => res.status(400).json({ success: false });
-    }
-  } else {
-    try {
-      const newUser = await User.create(req.body);
-      res.status(201).json({ success: true, data: newUser });
-    } catch {
-      (err) => res.status(400).json({ success: false });
-    }
+  try {
+    const newUser = await User.findOneAndUpdate(
+      req.body.userIdFromAuth0,
+      {
+        $set: { firstName: req.body.firstName, lastName: req.body.lastName },
+      },
+      {
+        returnOriginal: false,
+      }
+    );
+    await console.log(newUser);
+    res.status(201).json({ success: true, data: newUser });
+  } catch (err) {
+    res.status(400).json({ success: false });
   }
 }

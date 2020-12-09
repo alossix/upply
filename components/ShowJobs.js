@@ -3,15 +3,16 @@ import axios from "axios";
 import Link from "next/link";
 
 const ShowJobs = (props) => {
-  console.log(props);
   const [jobs, setJobs] = useState([]);
   const userIdFromAuth0 = props.user.sub;
-  // const { user, loading } = useFetchUser({ required: true });
 
   useEffect(() => {
-    // const userIdFromAuth0 = props.user.sub;
     axios
-      .post(`http://localhost:3000/api/job/fetch`, { userIdFromAuth0 })
+      .post(
+        // `https://upply.work/api/job/fetch`,
+        `http://localhost:3000/api/job/fetch`,
+        { userIdFromAuth0 }
+      )
       .then((info) => {
         setJobs(info.data.data);
         // console.log(info.data.data);
