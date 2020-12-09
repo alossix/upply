@@ -1,10 +1,9 @@
-import auth0 from '../../lib/auth0'
+import auth0 from "../../lib/auth0";
 
 export default async function callback(req, res) {
   try {
-    await auth0.handleCallback(req, res, { redirectTo: '/' })
+    await auth0.handleCallback(req, res, { redirectTo: "/user/" });
   } catch (error) {
-    console.error(error)
-    res.status(error.status || 500).end(error.message)
+    res.status(error.status || 500).end(error.message);
   }
 }

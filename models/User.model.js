@@ -1,6 +1,9 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const UserSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
+  userIdFromAuth0: {
+    type: String,
+  },
   email: {
     type: String,
     required: true,
@@ -15,13 +18,8 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  trackedCompanies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Company" }],
-  trackedJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Job" }],
-  hashedPassword: {
-    type: String,
-    required: true,
-  },
+  jobStack: [{ type: mongoose.Schema.Types.ObjectId, ref: "Job" }],
 });
 
-const User = mongoose.model("User", UserSchema);
-module.exports = User;
+const User = mongoose.models.users || mongoose.model("users", userSchema);
+export default User;

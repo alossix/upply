@@ -1,11 +1,12 @@
-import Head from 'next/head'
-import Header from './header'
+import Head from "next/head";
+import Header from "./header";
 
 function Layout({ user, loading = false, children }) {
   return (
     <>
       <Head>
-        <title>Next.js with Auth0</title>
+        <title>Upply: Manage Your Job Applications Like a Pro!</title>
+        <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
 
       <Header user={user} loading={loading} />
@@ -16,20 +17,30 @@ function Layout({ user, loading = false, children }) {
 
       <style jsx>{`
         .container {
-          max-width: 42rem;
-          margin: 1.5rem auto;
+          max-width: 90vw;
+          padding: 1rem;
+          margin: auto;
         }
       `}</style>
       <style jsx global>{`
-        body {
+        * {
           margin: 0;
-          color: #333;
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-            Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        html {
+          font-size: 14px;
+        }
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+            Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        }
+        p {
+          font-size: 14px;
         }
       `}</style>
     </>
-  )
+  );
 }
 
-export default Layout
+export default Layout;

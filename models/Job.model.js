@@ -1,61 +1,39 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const JobSchema = new mongoose.Schema({
-  company: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Company",
-    required: [
-      true,
-      "Please select an existing company or first add a new one",
-    ],
+const jobSchema = new mongoose.Schema({
+  bookmarked: {
+    type: Boolean,
+    default: false,
   },
   jobTitle: {
     type: String,
-    index: true,
-    required: [true, "Job title is required"],
+    required: [true, "Job title is required."],
   },
-  applied: {
-    type: Boolean,
-  },
-  favorite: {
-    type: Boolean,
-  },
-  response: [
-    {
-      type: String,
-    },
-  ],
-  followUp: [
-    {
-      type: String,
-    },
-  ],
-  platform: {
+  companyName: {
     type: String,
+    required: [true, "Company name is required."],
   },
-  jobListingUrl: {
-    type: String,
-    validate: {
-      validator: function (value) {
-        const urlPattern = /(http|https):\/\/(\w+:{0,1}\w*#)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%#!\-/]))?/;
-        const urlRegExp = new RegExp(urlPattern);
-        return value.match(urlRegExp);
-      },
-      message: `Please provide a valid URL.`,
-    },
-  },
-  location: String,
-  salary: String,
-  jobDescription: {
-    type: String,
-  },
-  prosList: [{ type: String }],
-  consList: [{ type: String }],
+  companyUrl: { type: String },
+  jobLocation: { type: String },
+  jobListingUrl: { type: String },
+  salary: { type: String },
+  notes: [String],
+  status: { type: String },
+  userIdFromAuth0: { type: String },
   added: {
     type: Date,
     default: Date.now,
   },
 });
 
-const Job = mongoose.model("Job", JobSchema);
-module.exports = Job;
+// const Job = () => {
+//   if (mongoose.model.Job) {
+//     return mongoose.model.Job;
+//   } else {
+//     return mongoose.model("job", jobSchema);
+//   }
+// };
+
+// module.exports = Job;
+const Job = mongoose.models.jobs || mongoose.model("jobs", jobSchema);
+export default Job;
