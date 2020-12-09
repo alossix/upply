@@ -1,10 +1,11 @@
-import dbConnect from "../../../configs/dbConnect";
 import mongoose from "mongoose";
-const User = mongoose.model("user");
+import dbConnect from "../../../configs/dbConnect";
+import User from "../../../models/User.model";
 
 export default async function userHandler(req, res) {
   await dbConnect();
   try {
+    console.log(`inside api user try`);
     const newUser = await User.findOneAndUpdate(
       req.body.userIdFromAuth0,
       {
@@ -12,6 +13,7 @@ export default async function userHandler(req, res) {
       },
       {
         returnOriginal: false,
+        upsert: true,
       }
     );
     await console.log(newUser);

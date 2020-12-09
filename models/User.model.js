@@ -21,5 +21,5 @@ const userSchema = new mongoose.Schema({
   jobStack: [{ type: mongoose.Schema.Types.ObjectId, ref: "Job" }],
 });
 
-const User = mongoose.models.user || mongoose.model("user", userSchema);
+const User = mongoose.models.users || mongoose.model("users", userSchema);
 export default User;

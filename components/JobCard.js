@@ -25,10 +25,10 @@ const JobCard = (props) => {
           ></img>
         )}
       </div>
+      <h3 className="status-entry">
+        {job.jobTitle}, {job.companyName}
+      </h3>
       <div className="job-info-section">
-        <h2 className="status-entry">
-          {job.jobTitle}, {job.companyName}
-        </h2>
         {job.jobLocation ? (
           <div>
             <p>
@@ -45,10 +45,12 @@ const JobCard = (props) => {
         ) : null}
         {job.notes.length > 0 ? (
           <div>
-            <h5>Notes:</h5>
+            <p>
+              <strong>Notes:</strong>
+            </p>
             <ul>
-              {job.notes.map((note) => (
-                <li>-{note}</li>
+              {job.notes.map((note, i) => (
+                <li key={i}>{note}</li>
               ))}
             </ul>
           </div>
@@ -79,10 +81,10 @@ const JobCard = (props) => {
       <style jsx>{`
         .job-card {
           width: 350px;
-          margin: 1rem;
           border-radius: 15px;
           border: 2px solid black;
           position: relative;
+          margin: 1rem 0rem;
         }
         .status-holder {
           display: flex;
@@ -97,6 +99,12 @@ const JobCard = (props) => {
           border-top-left-radius: 13px;
           border-top-right-radius: 13px;
           color: white;
+        }
+        h3 {
+          margin: 1rem 0rem;
+        }
+        .job-info-section {
+          margin-left: 1rem;
         }
         .open {
           background-color: white;
@@ -133,6 +141,9 @@ const JobCard = (props) => {
         .bottom-row img {
           width: 32px;
           margin-right: 2px;
+        }
+        ul {
+          padding-left: 2rem;
         }
       `}</style>
     </div>
