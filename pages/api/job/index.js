@@ -5,6 +5,7 @@ const Job = mongoose.model("job");
 export default async function jobHandler(req, res) {
   await dbConnect();
   try {
+    console.log(req.body.bookmarked);
     const newJob = await Job.create(req.body);
     res.status(201).json({ success: true, data: newJob });
   } catch (err) {

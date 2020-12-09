@@ -3,6 +3,7 @@ import axios from "axios";
 
 const CreateJob = (props) => {
   const userIdFromAuth0 = props.user.sub;
+  const [updated, setUpdated] = useState();
   const [jobTitle, setJobTitle] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [companyUrl, setCompanyUrl] = useState("");
@@ -16,17 +17,20 @@ const CreateJob = (props) => {
   const formSubmitHandler = (event) => {
     event.preventDefault();
     // axios.post("https://upply.work/api/job", {
-    axios.post("http://localhost:3000/api/job", {
-      userIdFromAuth0,
-      jobTitle,
-      companyName,
-      companyUrl,
-      jobLocation,
-      jobListingUrl,
-      status,
-      notes,
-      bookmarked,
-    });
+    axios
+      .post("http://localhost:3000/api/job", {
+        bookmarked,
+        jobTitle,
+        companyName,
+        companyUrl,
+        jobLocation,
+        jobListingUrl,
+        salary,
+        notes,
+        status,
+        userIdFromAuth0,
+      })
+      .then((res) => console.log(res));
   };
 
   return (
@@ -134,7 +138,7 @@ const CreateJob = (props) => {
             id="bookmarked"
             name="bookmarked"
             value={bookmarked}
-            onClick={() => setBookmarked(!bookmarked)}
+            onChange={() => setBookmarked(!bookmarked)}
           ></input>
         </div>
         <button type="submit">Submit</button>

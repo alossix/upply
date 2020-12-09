@@ -17,16 +17,26 @@ function Layout({ user, loading = false, children }) {
 
       <style jsx>{`
         .container {
-          max-width: 42rem;
-          margin: 1.5rem auto;
+          max-width: 90vw;
+          padding: 1rem;
+          margin: auto;
         }
       `}</style>
       <style jsx global>{`
-        body {
+        * {
           margin: 0;
-          color: #333;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        html {
+          font-size: 14px;
+        }
+        body {
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
             Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        }
+        p {
+          font-size: 14px;
         }
       `}</style>
     </>

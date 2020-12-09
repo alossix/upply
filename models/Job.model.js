@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const jobSchema = new mongoose.Schema({
+  bookmarked: {
+    type: Boolean,
+    default: false,
+  },
   jobTitle: {
     type: String,
     required: [true, "Job title is required."],
@@ -9,12 +13,12 @@ const jobSchema = new mongoose.Schema({
     type: String,
     required: [true, "Company name is required."],
   },
-  companyUrl: String,
-  jobLocation: String,
-  jobListingUrl: String,
+  companyUrl: { type: String },
+  jobLocation: { type: String },
+  jobListingUrl: { type: String },
   salary: { type: String },
   notes: [String],
-  status: String,
+  status: { type: String },
   userIdFromAuth0: { type: String },
   added: {
     type: Date,
@@ -22,4 +26,12 @@ const jobSchema = new mongoose.Schema({
   },
 });
 
-const Job = (module.exports = mongoose.model("job", jobSchema));
+const Job = () => {
+  if (mongoose.model.Job) {
+    return mongoose.model.Job;
+  } else {
+    return mongoose.model("job", jobSchema);
+  }
+};
+
+module.exports = Job;

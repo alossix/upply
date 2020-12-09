@@ -10,16 +10,23 @@ const indexStack = () => {
 
   return (
     <Layout user={user} loading={loading}>
-      <h2>Your Application Stack</h2>
-      <button onClick={() => setStackState(true)}>
-        Track a new job listing
-      </button>
-      {stackState ? <CreateJob user={user} /> : null}
-      {user ? (
-        <ShowJobs user={user}></ShowJobs>
-      ) : (
-        <h3 className="show-jobs-container">Loading...</h3>
-      )}
+      <div className="stack">
+        <h2>Your Application Stack</h2>
+        <button onClick={() => setStackState(!stackState)}>
+          Add a new job listing to your stack!
+        </button>
+        {stackState ? <CreateJob user={user} /> : null}
+        {user ? (
+          <ShowJobs user={user}></ShowJobs>
+        ) : (
+          <h3 className="show-jobs-container">Loading...</h3>
+        )}
+      </div>
+      <style jsx>{`
+        .stack {
+          width: 90vw;
+        }
+      `}</style>
     </Layout>
   );
 };
