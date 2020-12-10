@@ -31,7 +31,7 @@ const ShowJobs = (props) => {
           flex-wrap: wrap;
           border-top: 2px solid black;
           border-bottom: 2px solid black;
-          height: 50vh;
+
           overflow: auto;
         }
       `}</style>
