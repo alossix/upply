@@ -7,6 +7,11 @@ function Layout({ user, loading = false, children }) {
       <Head>
         <title>Upply: Manage Your Job Applications Like a Pro!</title>
         <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;900&display=swap"
+          rel="stylesheet"
+        />
       </Head>
 
       <Header user={user} loading={loading} />
@@ -18,7 +23,7 @@ function Layout({ user, loading = false, children }) {
       <style jsx>{`
         .container {
           max-width: 90vw;
-          padding: 1rem;
+          padding: 1rem 0rem;
           margin: auto;
         }
       `}</style>
@@ -32,11 +37,10 @@ function Layout({ user, loading = false, children }) {
           font-size: 14px;
         }
         body {
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-            Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+          font-family: "Nunito Sans", sans-serif;
         }
         p {
-          font-size: 14px;
+          font-size: 18px;
         }
       `}</style>
     </>

@@ -23,7 +23,6 @@ const EditUser = (props) => {
       const companyName = "FavoriteCo";
       const status = "open";
       const salary = "Money can't buy you happiness";
-      const notes = "Click the icon below to edit or delete entries";
       const jobInfo = await axios.post("http://localhost:3000/api/job", {
         userIdFromAuth0,
         jobTitle,
