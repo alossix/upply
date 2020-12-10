@@ -360,8 +360,8 @@ const indexStack = () => {
               margin: 0.5rem;
             }
             .job-card {
-              width: 400px;
-              min-height: 325px;
+              width: 360px;
+              min-height: 275px;
               border-radius: 15px;
               border: 2px solid black;
               position: relative;
