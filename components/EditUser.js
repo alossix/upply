@@ -9,9 +9,8 @@ const EditUser = (props) => {
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    // const formSubmit = await axios.post("https://upply.work/api/user", {
     const postUser = async () => {
-      const userInfo = await axios.post("http://localhost:3000/api/user", {
+      const userInfo = await axios.post("https://upply.work/api/user", {
         userIdFromAuth0,
         firstName,
         lastName,
@@ -22,10 +21,14 @@ const EditUser = (props) => {
     const postJob = async () => {
       const jobTitle = "Your Dream Role";
       const companyName = "FavoriteCo";
-      const jobInfo = await axios.post("http://localhost:3000/api/job", {
+      const status = "open";
+      const salary = "Money can't buy you happiness";
+      const jobInfo = await axios.post("https://upply.work/api/job", {
         userIdFromAuth0,
         jobTitle,
         companyName,
+        status,
+        salary,
       });
       await console.log(jobInfo);
       await Router.push("/user/stack");
