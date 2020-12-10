@@ -291,7 +291,10 @@ const indexStack = () => {
               padding: 0.5rem;
             }
             h2 {
-              font-size: 2rem;
+              font-size: 1.8rem;
+            }
+            p {
+              margin: 0.25rem 0rem;
             }
             .stack-page {
               display: flex;
@@ -358,7 +361,7 @@ const indexStack = () => {
             }
             .job-card {
               width: 400px;
-              min-height: 350px;
+              min-height: 325px;
               border-radius: 15px;
               border: 2px solid black;
               position: relative;
