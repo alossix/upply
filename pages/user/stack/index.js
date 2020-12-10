@@ -23,7 +23,6 @@ const indexStack = () => {
       axios
         .post(`http://localhost:3000/api/job/fetch`, { userIdFromAuth0 })
         .then((jobInfo) => {
-          console.log(jobInfo.data.data);
           setJobs(jobInfo.data.data);
         });
     }
@@ -133,7 +132,6 @@ const indexStack = () => {
                         </ul>
                       </div>
                     ) : null}
-
                     <div className="bottom-row">
                       <div className="urls">
                         {job.companyUrl ? (
@@ -358,6 +356,7 @@ const indexStack = () => {
             }
             .job-card {
               width: 350px;
+              min-height: 250px;
               border-radius: 15px;
               border: 2px solid black;
               position: relative;
@@ -382,7 +381,7 @@ const indexStack = () => {
               color: white;
             }
             h3 {
-              margin: 1rem 0rem;
+              margin: 1rem 0.5rem;
             }
             .job-info-section {
               margin-left: 1rem;
@@ -413,15 +412,17 @@ const indexStack = () => {
             .bookmark-img:hover {
               transform: scale(1.3);
             }
-            .job-info-section {
-              padding: 0.5rem;
-            }
             .status-entry {
               text-transform: capitalize;
             }
             .bottom-row {
               display: flex;
               justify-content: space-between;
+              position: absolute;
+              bottom: 0px;
+              width: 100%;
+              padding-right: 1.5rem;
+              padding-bottom: 0.5rem;
             }
             .bottom-row img {
               width: 32px;

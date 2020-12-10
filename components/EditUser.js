@@ -21,10 +21,15 @@ const EditUser = (props) => {
     const postJob = async () => {
       const jobTitle = "Your Dream Role";
       const companyName = "FavoriteCo";
+      const status = "open";
+      const salary = "Money can't buy you happiness";
+      const notes = "Click the icon below to edit or delete entries";
       const jobInfo = await axios.post("http://localhost:3000/api/job", {
         userIdFromAuth0,
         jobTitle,
         companyName,
+        status,
+        salary,
       });
       await console.log(jobInfo);
       await Router.push("/user/stack");

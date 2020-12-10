@@ -2,15 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useFetchUser } from "../../../lib/user";
 import Layout from "../../../components/layout";
-import Link from "next/link";
 import axios from "axios";
 
 const id = () => {
   const router = useRouter();
   const { user, loading } = useFetchUser();
   const { id } = router.query;
-  console.log(`this is the query: `);
-  console.log(JSON.stringify(router.query.id));
   const [jobTitle, setJobTitle] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [companyUrl, setCompanyUrl] = useState("");
@@ -18,27 +15,27 @@ const id = () => {
   const [salary, setSalary] = useState("");
   const [jobListingUrl, setJobListingUrl] = useState("");
   const [status, setStatus] = useState("open");
-  const [bookmarked, setBookmarked] = useState(false);
   const [notes, setNotes] = useState([]);
 
-  // useEffect(() => {
-  //   if (user) {
-  //     const userIdFromAuth0 = user.sub;
-  //     axios
-  //       .post(`http://localhost:3000/api/job/fetch`, { userIdFromAuth0 })
-  //       .then((jobInfo) => {
-  //         console.log(jobInfo.data.data);
-  //         setJobs(jobInfo.data.data);
-  //       });
-  //   }
-  // }, [user]);
+  useEffect(() => {
+    if (user) {
+      axios.post(`http://localhost:3000/api/job/query`, { id }).then((j) => {
+        setJobTitle(j.data.data.jobTitle);
+        setCompanyName(j.data.data.companyName);
+        setCompanyUrl(j.data.data.companyUrl);
+        setJobLocation(j.data.data.jobLocation);
+        setSalary(j.data.data.salary);
+        setJobListingUrl(j.data.data.jobListingUrl);
+        setStatus(j.data.data.status);
+        setNotes(j.data.data.notes);
+      });
+    }
+  }, [user]);
 
   const formSubmitHandler = (event) => {
-    const userIdFromAuth0 = user.sub;
     event.preventDefault();
     axios
-      .post("http://localhost:3000/api/job", {
-        bookmarked,
+      .post("http://localhost:3000/api/job/query/update", {
         jobTitle,
         companyName,
         companyUrl,
@@ -47,9 +44,8 @@ const id = () => {
         salary,
         notes,
         status,
-        userIdFromAuth0,
+        id,
       })
-      .then((jobsResponse) => setJobs([jobsResponse.data.data, ...jobs]))
       .then(() => {
         setJobTitle("");
         setCompanyName("");
@@ -58,9 +54,17 @@ const id = () => {
         setSalary("");
         setJobListingUrl("");
         setStatus("open");
-        // setBookmarked(false);
         setNotes([]);
+        router.push("/user/stack");
       });
+  };
+
+  const deleteHandler = () => {
+    console.log(`in deleteHandler, this is the id: ${id}`);
+    axios
+      .post("http://localhost:3000/api/job/delete", { id })
+      .then(() => router.push("/user/stack"))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -184,11 +188,20 @@ const id = () => {
                 </label>
               </div>
             </div>
-            <button type="submit">Submit</button>
+            <button className="submit-button" type="submit">
+              Submit
+            </button>
+            <button
+              className="delete-button"
+              type="submit"
+              onClick={() => deleteHandler()}
+            >
+              Delete this entry
+            </button>
           </form>
         </div>
       ) : (
-        <p>loading...</p>
+        <p>Loading...</p>
       )}
       <style jsx>{`
         .stack-form {

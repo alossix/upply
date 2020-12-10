@@ -1,9 +1,7 @@
-import mongoose from "mongoose";
 import dbConnect from "../../../../configs/dbConnect";
 import Job from "../../../../models/Job.model";
 
 export default async function jobHandler(req, res) {
-  console.log(JSON.stringify(req.body));
   const { id, newBookmarkState } = req.body;
   await dbConnect();
   try {
