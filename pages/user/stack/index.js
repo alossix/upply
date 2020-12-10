@@ -90,7 +90,7 @@ const indexStack = () => {
               return (
                 <div className="job-card" key={index}>
                   <div className="status-holder">
-                    <div className={classSetter(job)}>{job.status}</div>
+                    <h2 className={classSetter(job)}>{job.status}</h2>
                     <img
                       className="bookmark-img"
                       src={
@@ -102,10 +102,10 @@ const indexStack = () => {
                       onClick={() => bookmarkHandler(job)}
                     ></img>
                   </div>
-                  <h3 className="status-entry">
-                    {job.jobTitle}, {job.companyName}
-                  </h3>
                   <div className="job-info-section">
+                    <h2 className="status-entry">
+                      {job.jobTitle}, {job.companyName}
+                    </h2>
                     {job.jobLocation ? (
                       <div>
                         <p>
@@ -155,7 +155,7 @@ const indexStack = () => {
                         href="/user/stack/[id]"
                         as={`/user/stack/${job._id}`}
                       >
-                        <a>
+                        <a title="Click to edit">
                           <img src="/edit.png" alt="edit"></img>
                         </a>
                       </Link>
@@ -287,9 +287,11 @@ const indexStack = () => {
             </form>
           </div>
           <style jsx>{`
-            h1,
+            h1 {
+              padding: 0.5rem;
+            }
             h2 {
-              padding: 1rem 0rem;
+              font-size: 2rem;
             }
             .stack-page {
               display: flex;
@@ -369,13 +371,12 @@ const indexStack = () => {
             .status-holder {
               display: flex;
               justify-content: space-between;
-              font-weight: bold;
-              height: 3rem;
+              font-weight: 200;
+              text-transform: uppercase;
             }
             .bar {
-              text-transform: capitalize;
               width: 100%;
-              padding: 0.5rem;
+              padding: 0.6rem 1rem 0.4rem 1.5rem;
               border-top-left-radius: 13px;
               border-top-right-radius: 13px;
               color: white;
@@ -384,7 +385,7 @@ const indexStack = () => {
               margin: 1rem 0.5rem;
             }
             .job-info-section {
-              margin-left: 1rem;
+              padding: 1rem 1.5rem;
             }
             .open {
               background-color: white;
@@ -402,15 +403,12 @@ const indexStack = () => {
               background-color: #006f3c;
             }
             .bookmark-img {
-              width: 20px;
+              width: 23px;
               height: 32px;
               position: absolute;
               right: 1rem;
-              top: 4px;
+              top: -3px;
               transition: transform 0.2s;
-            }
-            .bookmark-img:hover {
-              transform: scale(1.3);
             }
             .status-entry {
               text-transform: capitalize;
@@ -421,12 +419,14 @@ const indexStack = () => {
               position: absolute;
               bottom: 0px;
               width: 100%;
-              padding-right: 1.5rem;
               padding-bottom: 0.5rem;
             }
             .bottom-row img {
               width: 32px;
-              margin-right: 2px;
+              margin-right: 2rem;
+            }
+            .bottom-row img:hover {
+              cursor: pointer;
             }
             ul {
               padding-left: 2rem;

@@ -9,7 +9,7 @@ function Layout({ user, loading = false, children }) {
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;700;900&display=swap"
           rel="stylesheet"
         />
       </Head>
@@ -34,13 +34,16 @@ function Layout({ user, loading = false, children }) {
           box-sizing: border-box;
         }
         html {
-          font-size: 14px;
+          font-size: 10px;
         }
         body {
           font-family: "Nunito Sans", sans-serif;
         }
         p {
-          font-size: 18px;
+          font-size: 1.5rem;
+        }
+        li {
+          font-size: 1.5rem;
         }
       `}</style>
     </>

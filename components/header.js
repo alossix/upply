@@ -72,6 +72,7 @@ function Header({ user, loading }) {
         }
         li {
           margin-right: 1rem;
+          font-size: 14px;
         }
         li:nth-child(2) {
           margin-right: auto;
