@@ -26,14 +26,5 @@ const jobSchema = new mongoose.Schema({
   },
 });
 
-// const Job = () => {
-//   if (mongoose.model.Job) {
-//     return mongoose.model.Job;
-//   } else {
-//     return mongoose.model("job", jobSchema);
-//   }
-// };
-
-// module.exports = Job;
 const Job = mongoose.models.jobs || mongoose.model("jobs", jobSchema);
 export default Job;

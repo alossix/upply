@@ -19,7 +19,7 @@ const id = () => {
 
   useEffect(() => {
     if (user) {
-      axios.post(`http://localhost:3000/api/job/query`, { id }).then((j) => {
+      axios.post(`https://upply.work/api/job/query`, { id }).then((j) => {
         setJobTitle(j.data.data.jobTitle);
         setCompanyName(j.data.data.companyName);
         setCompanyUrl(j.data.data.companyUrl);
@@ -35,7 +35,7 @@ const id = () => {
   const formSubmitHandler = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:3000/api/job/query/update", {
+      .post("https://upply.work/api/job/query/update", {
         jobTitle,
         companyName,
         companyUrl,
@@ -62,7 +62,7 @@ const id = () => {
   const deleteHandler = () => {
     console.log(`in deleteHandler, this is the id: ${id}`);
     axios
-      .post("http://localhost:3000/api/job/delete", { id })
+      .post("https://upply.work/api/job/delete", { id })
       .then(() => router.push("/user/stack"))
       .catch((err) => console.log(err));
   };

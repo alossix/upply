@@ -21,7 +21,7 @@ const indexStack = () => {
     if (user) {
       const userIdFromAuth0 = user.sub;
       axios
-        .post(`http://localhost:3000/api/job/fetch`, { userIdFromAuth0 })
+        .post(`https://upply.work/api/job/fetch`, { userIdFromAuth0 })
         .then((jobInfo) => {
           setJobs(jobInfo.data.data);
         });
@@ -32,7 +32,7 @@ const indexStack = () => {
     const userIdFromAuth0 = user.sub;
     event.preventDefault();
     axios
-      .post("http://localhost:3000/api/job", {
+      .post("https://upply.work/api/job", {
         bookmarked,
         jobTitle,
         companyName,
@@ -70,7 +70,7 @@ const indexStack = () => {
       job.bookmarked = newBookmarkState;
       setBookmarked(newBookmarkState);
     }
-    axios.post("http://localhost:3000/api/job/update", {
+    axios.post("https://upply.work/api/job/update", {
       id,
       newBookmarkState,
     });
