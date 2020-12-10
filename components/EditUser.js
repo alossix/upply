@@ -9,7 +9,6 @@ const EditUser = (props) => {
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    // const formSubmit = await axios.post("https://upply.work/api/user", {
     const postUser = async () => {
       const userInfo = await axios.post("http://localhost:3000/api/user", {
         userIdFromAuth0,

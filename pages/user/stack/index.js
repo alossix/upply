@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useFetchUser } from "../../../lib/user";
 import Layout from "../../../components/layout";
 import axios from "axios";
-import JobCard from "../../../components/JobCard";
+import Link from "next/link";
 
 const indexStack = () => {
   const { user, loading } = useFetchUser();
@@ -22,7 +22,10 @@ const indexStack = () => {
       const userIdFromAuth0 = user.sub;
       axios
         .post(`http://localhost:3000/api/job/fetch`, { userIdFromAuth0 })
-        .then((jobInfo) => setJobs(jobInfo.data.data));
+        .then((jobInfo) => {
+          console.log(jobInfo.data.data);
+          setJobs(jobInfo.data.data);
+        });
     }
   }, [user]);
 
@@ -42,7 +45,40 @@ const indexStack = () => {
         status,
         userIdFromAuth0,
       })
-      .then((jobsResponse) => setJobs([jobsResponse.data.data, ...jobs]));
+      .then((jobsResponse) => setJobs([jobsResponse.data.data, ...jobs]))
+      .then(() => {
+        setJobTitle("");
+        setCompanyName("");
+        setCompanyUrl("");
+        setJobLocation("");
+        setSalary("");
+        setJobListingUrl("");
+        setStatus("open");
+        // setBookmarked(false);
+        setNotes([]);
+      });
+  };
+
+  const bookmarkHandler = (job) => {
+    const id = job._id;
+    let newBookmarkState;
+    if (job.bookmarked) {
+      newBookmarkState = false;
+      job.bookmarked = newBookmarkState;
+      setBookmarked(newBookmarkState);
+    } else {
+      newBookmarkState = true;
+      job.bookmarked = newBookmarkState;
+      setBookmarked(newBookmarkState);
+    }
+    axios.post("http://localhost:3000/api/job/update", {
+      id,
+      newBookmarkState,
+    });
+  };
+
+  const classSetter = (job) => {
+    return `${job.status} bar`;
   };
 
   return (
@@ -52,7 +88,83 @@ const indexStack = () => {
           <h1>Your Application Stack</h1>
           <div className="show-jobs-container">
             {jobs.map((job, index) => {
-              return <JobCard job={job} key={index}></JobCard>;
+              return (
+                <div className="job-card" key={index}>
+                  <div className="status-holder">
+                    <div className={classSetter(job)}>{job.status}</div>
+                    <img
+                      className="bookmark-img"
+                      src={
+                        job.bookmarked
+                          ? "/bookmarked.png"
+                          : "/bookmark-empty.png"
+                      }
+                      alt="bookmarked"
+                      onClick={() => bookmarkHandler(job)}
+                    ></img>
+                  </div>
+                  <h3 className="status-entry">
+                    {job.jobTitle}, {job.companyName}
+                  </h3>
+                  <div className="job-info-section">
+                    {job.jobLocation ? (
+                      <div>
+                        <p>
+                          <strong>Location: </strong>
+                          {job.jobLocation}
+                        </p>
+                      </div>
+                    ) : null}
+                    {job.salary ? (
+                      <p>
+                        <strong>Salary: </strong>
+                        {job.salary}
+                      </p>
+                    ) : null}
+                    {job.notes.length > 0 ? (
+                      <div>
+                        <p>
+                          <strong>Notes:</strong>
+                        </p>
+                        <ul>
+                          {job.notes.map((note, i) => (
+                            <li key={i}>{note}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : null}
+
+                    <div className="bottom-row">
+                      <div className="urls">
+                        {job.companyUrl ? (
+                          <Link href={job.companyUrl}>
+                            <a>
+                              Company website
+                              <br />
+                            </a>
+                          </Link>
+                        ) : null}
+                        {job.jobListingUrl ? (
+                          <Link href={job.jobListingUrl}>
+                            <a>
+                              Job listing page
+                              <br />
+                            </a>
+                          </Link>
+                        ) : null}
+                      </div>
+                      <Link
+                        href="/user/stack/[id]"
+                        as={`/user/stack/${job._id}`}
+                      >
+                        <a>
+                          <img src="/edit.png" alt="edit"></img>
+                        </a>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
             })}
           </div>
           <div className="edit-job-container">
@@ -158,16 +270,6 @@ const indexStack = () => {
                     </div>
                   </div>
                 </div>
-                <div className="bookmarked">
-                  <label htmlFor="bookmarked">Bookmark this listing: </label>
-                  <input
-                    type="checkbox"
-                    id="bookmarked"
-                    name="bookmarked"
-                    value={bookmarked}
-                    onChange={() => setBookmarked(!bookmarked)}
-                  ></input>
-                </div>
               </div>
               <div className="stack-form-container-right">
                 <div className="text-area">
@@ -254,8 +356,79 @@ const indexStack = () => {
             .statuses input {
               margin: 0.5rem;
             }
-            .bookmarked {
-              padding: 1rem 0rem;
+            .job-card {
+              width: 350px;
+              border-radius: 15px;
+              border: 2px solid black;
+              position: relative;
+              margin: 1rem;
+              transition: transform 0.2s;
+            }
+            .job-card:hover {
+              transform: scale(1.05);
+            }
+            .status-holder {
+              display: flex;
+              justify-content: space-between;
+              font-weight: bold;
+              height: 3rem;
+            }
+            .bar {
+              text-transform: capitalize;
+              width: 100%;
+              padding: 0.5rem;
+              border-top-left-radius: 13px;
+              border-top-right-radius: 13px;
+              color: white;
+            }
+            h3 {
+              margin: 1rem 0rem;
+            }
+            .job-info-section {
+              margin-left: 1rem;
+            }
+            .open {
+              background-color: white;
+              color: black;
+              border-bottom: 2px solid black;
+            }
+
+            .applied {
+              background-color: #7096db;
+            }
+            .interviews {
+              background-color: #264b96;
+            }
+            .offer {
+              background-color: #006f3c;
+            }
+            .bookmark-img {
+              width: 20px;
+              height: 32px;
+              position: absolute;
+              right: 1rem;
+              top: 4px;
+              transition: transform 0.2s;
+            }
+            .bookmark-img:hover {
+              transform: scale(1.3);
+            }
+            .job-info-section {
+              padding: 0.5rem;
+            }
+            .status-entry {
+              text-transform: capitalize;
+            }
+            .bottom-row {
+              display: flex;
+              justify-content: space-between;
+            }
+            .bottom-row img {
+              width: 32px;
+              margin-right: 2px;
+            }
+            ul {
+              padding-left: 2rem;
             }
           `}</style>
         </div>

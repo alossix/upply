@@ -5,21 +5,7 @@ import Job from "../../../models/Job.model";
 export default async function jobHandler(req, res) {
   await dbConnect();
   try {
-    const newJob = await Job.create(
-      req.body
-      // {
-      //   $set: {
-      //     userIdFromAuth0: req.body.userIdFromAuth0,
-      //     jobTitle: req.body.jobTitle,
-      //     companyName: req.body.companyName,
-      //   },
-      // },
-      // {
-      //   returnOriginal: false,
-      //   upsert: true,
-      // }
-    );
-    await console.log(newJob);
+    const newJob = await Job.create(req.body);
     res.status(201).json({ success: true, data: newJob });
   } catch (err) {
     console.log(`inside api job catch`);

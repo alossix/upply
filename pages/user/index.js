@@ -3,6 +3,7 @@ import Layout from "../../components/layout";
 import Link from "next/link";
 import EditUser from "../../components/EditUser";
 import React, { useState } from "react";
+import axios from "axios";
 
 const Profile = () => {
   const { user, loading } = useFetchUser({ required: true });
