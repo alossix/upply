@@ -357,8 +357,8 @@ const indexStack = () => {
               margin: 0.5rem;
             }
             .job-card {
-              width: 350px;
-              min-height: 250px;
+              width: 400px;
+              min-height: 350px;
               border-radius: 15px;
               border: 2px solid black;
               position: relative;
