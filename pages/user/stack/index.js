@@ -21,7 +21,9 @@ const indexStack = () => {
     if (user) {
       const userIdFromAuth0 = user.sub;
       axios
-        .post(`https://upply.work/api/job/fetch`, { userIdFromAuth0 })
+        // .post(`https://upply.work/api/job/fetch`, { userIdFromAuth0 })
+        // .post(`http://localhost:3000/api/job/fetch`, { userIdFromAuth0 })
+        .post(`/api/job/fetch`, { userIdFromAuth0 })
         .then((jobInfo) => {
           setJobs(jobInfo.data.data);
         });
@@ -32,7 +34,9 @@ const indexStack = () => {
     const userIdFromAuth0 = user.sub;
     event.preventDefault();
     axios
-      .post("https://upply.work/api/job", {
+      // .post("https://upply.work/api/job", {
+      // .post("http://localhost:3000/api/job", {
+      .post("/api/job", {
         bookmarked,
         jobTitle,
         companyName,
@@ -53,7 +57,6 @@ const indexStack = () => {
         setSalary("");
         setJobListingUrl("");
         setStatus("open");
-        // setBookmarked(false);
         setNotes([]);
       });
   };
@@ -70,7 +73,9 @@ const indexStack = () => {
       job.bookmarked = newBookmarkState;
       setBookmarked(newBookmarkState);
     }
-    axios.post("https://upply.work/api/job/update", {
+    // axios.post("https://upply.work/api/job/update", {
+    // axios.post("http://localhost:3000/api/job/update", {
+    axios.post("/api/job/update", {
       id,
       newBookmarkState,
     });
@@ -90,8 +95,9 @@ const indexStack = () => {
               return (
                 <div className="job-card" key={index}>
                   <div className="status-holder">
-                    <h2 className={classSetter(job)}>{job.status}</h2>
+                    <h3 className={classSetter(job)}>{job.status}</h3>
                     <img
+                      title="Click to bookmark"
                       className="bookmark-img"
                       src={
                         job.bookmarked
@@ -104,7 +110,7 @@ const indexStack = () => {
                   </div>
                   <div className="job-info-section">
                     <h2 className="status-entry">
-                      {job.jobTitle}, {job.companyName}
+                      {job.jobTitle} • {job.companyName}
                     </h2>
                     {job.jobLocation ? (
                       <div>
@@ -168,130 +174,145 @@ const indexStack = () => {
           <div className="edit-job-container">
             <h2>Add a new job listing to your Stack</h2>
             <form className="stack-form" onSubmit={formSubmitHandler}>
-              <div className="stack-form-container-left">
-                <div className="row-1">
-                  <label>
-                    Job Title: *<br />
-                    <input
-                      type="text"
-                      value={jobTitle}
-                      onChange={(e) => setJobTitle(e.target.value)}
-                    ></input>
-                  </label>
-                  <label>
-                    Company Name: *<br />
-                    <input
-                      type="text"
-                      value={companyName}
-                      onChange={(e) => setCompanyName(e.target.value)}
-                    ></input>
-                  </label>
-                </div>
-                <div className="row-2">
-                  <label>
-                    Company Website URL: <br />
-                    <input
-                      type="string"
-                      value={companyUrl}
-                      onChange={(e) => setCompanyUrl(e.target.value)}
-                    ></input>
-                  </label>
-                  <label>
-                    Job Location: <br />
-                    <input
-                      type="text"
-                      value={jobLocation}
-                      onChange={(e) => setJobLocation(e.target.value)}
-                    ></input>
-                  </label>
-                </div>
-                <div className="row-3">
-                  <label>
-                    Salary: <br />
-                    <input
-                      type="text"
-                      value={salary}
-                      onChange={(e) => setSalary(e.target.value)}
-                    ></input>
-                  </label>
-                  <label>
-                    Job Listing URL: <br />
-                    <input
-                      type="string"
-                      value={jobListingUrl}
-                      onChange={(e) => setJobListingUrl(e.target.value)}
-                    ></input>
-                  </label>
-                </div>
-                <div className="status-area">
-                  <p>Current Status:</p>
-                  <div className="statuses">
-                    <div>
+              <div className="stack-form-container">
+                <div className="stack-form-container-left">
+                  <div className="row-1">
+                    <label>
+                      Job Title: *<br />
                       <input
-                        type="radio"
-                        id="open"
-                        name="status"
-                        value="open"
-                        onChange={() => setStatus("open")}
+                        className="text-input"
+                        type="text"
+                        value={jobTitle}
+                        onChange={(e) => setJobTitle(e.target.value)}
                       ></input>
-                      <label htmlFor="open">Open</label>
-                    </div>
-                    <div>
+                    </label>
+                    <label>
+                      Company Name: *<br />
                       <input
-                        type="radio"
-                        id="applied"
-                        name="status"
-                        value="applied"
-                        onChange={() => setStatus("applied")}
+                        className="text-input"
+                        type="text"
+                        value={companyName}
+                        onChange={(e) => setCompanyName(e.target.value)}
                       ></input>
-                      <label htmlFor="applied">Applied</label>
-                    </div>
-                    <div>
+                    </label>
+                  </div>
+                  <div className="row-2">
+                    <label>
+                      Company Website URL: <br />
                       <input
-                        type="radio"
-                        id="interviews"
-                        name="status"
-                        value="interviews"
-                        onChange={() => setStatus("interviews")}
+                        className="text-input"
+                        type="string"
+                        value={companyUrl}
+                        onChange={(e) => setCompanyUrl(e.target.value)}
                       ></input>
-                      <label htmlFor="interviews">Interviews</label>
-                    </div>
-                    <div>
+                    </label>
+                    <label>
+                      Job Location: <br />
                       <input
-                        type="radio"
-                        id="offer"
-                        name="status"
-                        value="offer"
-                        onChange={() => setStatus("offer")}
+                        className="text-input"
+                        type="text"
+                        value={jobLocation}
+                        onChange={(e) => setJobLocation(e.target.value)}
                       ></input>
-                      <label htmlFor="offer">Offer Received</label>
+                    </label>
+                  </div>
+                  <div className="row-3">
+                    <label>
+                      Salary: <br />
+                      <input
+                        className="text-input"
+                        type="text"
+                        value={salary}
+                        onChange={(e) => setSalary(e.target.value)}
+                      ></input>
+                    </label>
+                    <label>
+                      Job Listing URL: <br />
+                      <input
+                        className="text-input"
+                        type="string"
+                        value={jobListingUrl}
+                        onChange={(e) => setJobListingUrl(e.target.value)}
+                      ></input>
+                    </label>
+                  </div>
+                  <div className="status-area">
+                    <p>Current Status:</p>
+                    <div className="statuses">
+                      <div>
+                        <input
+                          type="radio"
+                          id="open"
+                          name="status"
+                          value="open"
+                          onChange={() => setStatus("open")}
+                        ></input>
+                        <label htmlFor="open">Open</label>
+                      </div>
+                      <div>
+                        <input
+                          type="radio"
+                          id="applied"
+                          name="status"
+                          value="applied"
+                          onChange={() => setStatus("applied")}
+                        ></input>
+                        <label htmlFor="applied">Applied</label>
+                      </div>
+                      <div>
+                        <input
+                          type="radio"
+                          id="interviews"
+                          name="status"
+                          value="interviews"
+                          onChange={() => setStatus("interviews")}
+                        ></input>
+                        <label htmlFor="interviews">Interviews</label>
+                      </div>
+                      <div>
+                        <input
+                          type="radio"
+                          id="offer"
+                          name="status"
+                          value="offer"
+                          onChange={() => setStatus("offer")}
+                        ></input>
+                        <label htmlFor="offer">Offer Received</label>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="stack-form-container-right">
-                <div className="text-area">
-                  <label>
-                    Add Notes: <br />
-                    <textarea
-                      type="text"
-                      rows="13"
-                      cols="50"
-                      value={notes}
-                      onChange={(e) => setNotes(e.target.value)}
-                    ></textarea>
-                  </label>
+                <div className="stack-form-container-right">
+                  <div className="text-area">
+                    <label>
+                      Add Notes: <br />
+                      <textarea
+                        type="text"
+                        rows="11"
+                        cols="50"
+                        value={notes}
+                        onChange={(e) => setNotes(e.target.value)}
+                      ></textarea>
+                    </label>
+                  </div>
                 </div>
               </div>
-              <button type="submit">Submit</button>
+              <button className="stack-form-button" type="submit">
+                Submit
+              </button>
             </form>
           </div>
           <style jsx>{`
             h1 {
-              padding: 0.5rem;
+              padding: 0.5rem 0rem;
             }
             h2 {
+              font-size: 2rem;
+            }
+            h3 {
               font-size: 1.8rem;
+              font-weight: 200;
+              text-transform: uppercase;
             }
             p {
               margin: 0.25rem 0rem;
@@ -299,65 +320,18 @@ const indexStack = () => {
             .stack-page {
               display: flex;
               flex-direction: column;
+              max-width: 90vw;
+              margin-top: 2rem;
             }
             .show-jobs-container {
-              align-items: center;
-              height: 55vh;
+              height: 650px;
               display: flex;
-              justify-content: space-between;
+              justify-content: flex-start;
+              align-items: flex-start;
               flex-wrap: wrap;
               border-top: 2px solid black;
               border-bottom: 2px solid black;
               overflow: auto;
-            }
-            .stack-form {
-              display: flex;
-              justify-content: space-between;
-              flex-wrap: wrap;
-            }
-            .row-1 {
-              display: flex;
-              justify-content: space-between;
-            }
-            .row-1 input {
-              min-width: 20vw;
-              margin-bottom: 1rem;
-              margin-right: 1rem;
-            }
-            .row-2 {
-              display: flex;
-              justify-content: space-between;
-            }
-            .row-2 input {
-              min-width: 20vw;
-              margin-bottom: 1rem;
-              margin-right: 1rem;
-            }
-            .row-3 {
-              display: flex;
-              justify-content: space-between;
-            }
-            .row-3 input {
-              min-width: 20vw;
-              margin-bottom: 1rem;
-              margin-right: 1rem;
-            }
-            .stack-form button {
-              width: 10rem;
-            }
-            .status-area {
-              display: flex;
-              flex-direction: column;
-              justify-content: flex-start;
-              margin-right: 1rem;
-            }
-            .statuses {
-              display: flex;
-              justify-content: space-between;
-              flex-wrap: wrap;
-            }
-            .statuses input {
-              margin: 0.5rem;
             }
             .job-card {
               width: 360px;
@@ -374,8 +348,6 @@ const indexStack = () => {
             .status-holder {
               display: flex;
               justify-content: space-between;
-              font-weight: 200;
-              text-transform: uppercase;
             }
             .bar {
               width: 100%;
@@ -383,9 +355,6 @@ const indexStack = () => {
               border-top-left-radius: 13px;
               border-top-right-radius: 13px;
               color: white;
-            }
-            h3 {
-              margin: 1rem 0.5rem;
             }
             .job-info-section {
               padding: 1rem 1.5rem;
@@ -395,7 +364,6 @@ const indexStack = () => {
               color: black;
               border-bottom: 2px solid black;
             }
-
             .applied {
               background-color: #7096db;
             }
@@ -412,6 +380,9 @@ const indexStack = () => {
               right: 1rem;
               top: -3px;
               transition: transform 0.2s;
+            }
+            .bookmark-img:hover {
+              cursor: pointer;
             }
             .status-entry {
               text-transform: capitalize;
@@ -433,6 +404,79 @@ const indexStack = () => {
             }
             ul {
               padding-left: 2rem;
+            }
+            .edit-job-container h2 {
+              margin: 1.5rem 0rem;
+            }
+            .stack-form {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              flex-wrap: wrap;
+            }
+            .stack-form-container {
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: flex-start;
+            }
+            .stack-form-container-right {
+              margin-left: 5rem;
+            }
+            .row-1 {
+              display: flex;
+              justify-content: space-between;
+            }
+            .row-2 {
+              display: flex;
+              justify-content: space-between;
+            }
+            .row-3 {
+              display: flex;
+              justify-content: space-between;
+            }
+            .text-input {
+              min-width: 20vw;
+              margin: 0 1rem 1rem 0;
+              padding: 0.5rem;
+              font-size: 1.5rem;
+              border-radius: 15px;
+            }
+            .status-area {
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+              margin-right: 1rem;
+            }
+            .statuses {
+              display: flex;
+              justify-content: space-between;
+              flex-wrap: wrap;
+            }
+            .statuses input {
+              margin: 0.5rem;
+            }
+            textarea {
+              border-radius: 15px;
+              padding-left: 0.5rem;
+              font-size: 1.5rem;
+            }
+            .stack-form-button {
+              font-weight: bold;
+              font-size: 1.4rem;
+              width: 90px;
+              color: #fff;
+              background-color: #000;
+              padding: 0.8rem 2rem;
+              margin-top: 3rem;
+              border: 3px solid black;
+              border-radius: 15px;
+            }
+            .stack-form-button:hover {
+              color: #000;
+              background-color: #fff;
+            }
+            .stack-form-button:focus {
+              outline: none;
             }
           `}</style>
         </div>

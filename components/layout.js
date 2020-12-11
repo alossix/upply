@@ -45,6 +45,18 @@ function Layout({ user, loading = false, children }) {
         li {
           font-size: 1.5rem;
         }
+        label {
+          font-size: 1.5rem;
+        }
+        button {
+          font-family: "Nunito Sans", sans-serif;
+          cursor: pointer;
+        }
+        input,
+        textarea {
+          outline: none;
+          font-family: "Nunito Sans", sans-serif;
+        }
       `}</style>
     </>
   );
