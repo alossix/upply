@@ -1,5 +1,6 @@
 import Layout from "../components/layout";
 import { useFetchUser } from "../lib/user";
+import Link from "next/link";
 
 function Home() {
   const { user, loading } = useFetchUser();
@@ -7,18 +8,27 @@ function Home() {
   return (
     <Layout user={user} loading={loading}>
       <section className="main-section">
-        <div className="main-section-left">
-          <h1>
-            Stop relying on spreadsheets and start managing your job
-            applications like a pro!
-          </h1>
+        <div className="main-section-top">
+          <div className="main-section-left">
+            <h1>
+              Stop relying on spreadsheets and start managing your job
+              applications like a pro!
+            </h1>
+          </div>
+          <div className="main-section-right">
+            <img
+              className="job-card"
+              src="/jobcard.png"
+              alt="upply jobcard"
+            ></img>
+          </div>
         </div>
-        <div className="main-section-right">
-          <img
-            className="job-card"
-            src="/jobcard.png"
-            alt="upply jobcard"
-          ></img>
+        <div className="signup-button-section">
+          <Link href="/api/login">
+            <a>
+              <button className="signup-button">Sign Up Now</button>
+            </a>
+          </Link>
         </div>
       </section>
       <section className="description-section">
@@ -61,9 +71,13 @@ function Home() {
         }
         .main-section {
           display: flex;
+          flex-direction: column;
           align-items: center;
           height: 25vh;
           justify-content: center;
+        }
+        .main-section-top {
+          display: flex;
         }
         .main-section-left {
           width: 40%;
@@ -102,7 +116,8 @@ function Home() {
           .main-section {
             width: 90vw;
             flex-direction: column;
-            height: 80vh;
+            justify-content: space-around;
+            height: 60vh;
           }
           .main-section-left {
             width: 90vw;
@@ -110,6 +125,7 @@ function Home() {
           .description-section {
             width: 90vw;
             height: 80vh;
+            padding: 0rem 1rem;
           }
         }
       `}</style>

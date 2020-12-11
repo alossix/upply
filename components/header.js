@@ -34,7 +34,7 @@ function Header({ user, loading }) {
             ) : (
               <Link href="/api/login">
                 <a>
-                  <button>Log In or Sign Up</button>
+                  <button>Log In</button>
                 </a>
               </Link>
             ))}
