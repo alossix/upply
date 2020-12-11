@@ -98,7 +98,6 @@ function Home() {
           background-color: #000;
           padding: 1.6rem 4rem;
           margin: 6rem 0rem;
-          cursor: pointer;
           border: 3px solid black;
           border-radius: 15px;
         }
