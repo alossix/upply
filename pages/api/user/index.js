@@ -5,7 +5,6 @@ import User from "../../../models/User.model";
 export default async function userHandler(req, res) {
   await dbConnect();
   try {
-    console.log(`inside api user try`);
     const newUser = await User.findOneAndUpdate(
       req.body.userIdFromAuth0,
       {

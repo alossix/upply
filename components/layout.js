@@ -45,6 +45,9 @@ function Layout({ user, loading = false, children }) {
         li {
           font-size: 1.5rem;
         }
+        label {
+          font-size: 1.5rem;
+        }
       `}</style>
     </>
   );

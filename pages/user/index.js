@@ -12,19 +12,25 @@ const Profile = () => {
     <div className="profile-page">
       {user ? (
         <Layout user={user} loading={loading}>
-          <h1>Welcome to Your User Profile!</h1>
-          <div className="profile-card">
-            <div>
-              <Link href="/user/stack">
-                <a>See your Stack</a>
-              </Link>
+          <div className="profile-page-container">
+            <h1>Welcome to Your User Profile!</h1>
+            <div className="profile-card">
+              <EditUser user={user} loading={loading}></EditUser>
             </div>
-            <EditUser user={user} loading={loading}></EditUser>
           </div>
         </Layout>
       ) : (
         <h3>Loading...</h3>
       )}
+      <style jsx>{`
+        .profile-page-container {
+          max-width: 90vw;
+          margin: 2rem auto;
+        }
+        h1 {
+          padding: 0.5rem;
+        }
+      `}</style>
     </div>
   );
 };

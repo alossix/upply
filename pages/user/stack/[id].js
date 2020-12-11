@@ -19,7 +19,9 @@ const id = () => {
 
   useEffect(() => {
     if (user) {
-      axios.post(`https://upply.work/api/job/query`, { id }).then((j) => {
+      // axios.post(`https://upply.work/api/job/query`, { id }).then((j) => {
+      // axios.post(`http://localhost:3000/api/job/query`, { id }).then((j) => {
+      axios.post(`/api/job/query`, { id }).then((j) => {
         setJobTitle(j.data.data.jobTitle);
         setCompanyName(j.data.data.companyName);
         setCompanyUrl(j.data.data.companyUrl);
@@ -35,7 +37,9 @@ const id = () => {
   const formSubmitHandler = (event) => {
     event.preventDefault();
     axios
-      .post("https://upply.work/api/job/query/update", {
+      // .post("https://upply.work/api/job/query/update", {
+      // .post("http://localhost:3000/api/job/query/update", {
+      .post("/api/job/query/update", {
         jobTitle,
         companyName,
         companyUrl,
@@ -62,7 +66,9 @@ const id = () => {
   const deleteHandler = () => {
     console.log(`in deleteHandler, this is the id: ${id}`);
     axios
-      .post("https://upply.work/api/job/delete", { id })
+      // .post("https://upply.work/api/job/delete", { id })
+      // .post("http://localhost:3000/api/job/delete", { id })
+      .post("/api/job/delete", { id })
       .then(() => router.push("/user/stack"))
       .catch((err) => console.log(err));
   };
@@ -71,7 +77,12 @@ const id = () => {
     <Layout user={user} loading={loading}>
       {user ? (
         <div className="edit-job-container">
-          <h2>Edit Job Listing ID# {id}</h2>
+          <h1>
+            Edit Job Listing{" "}
+            <strong>
+              {jobTitle} (ID#{id})
+            </strong>
+          </h1>
           <form className="stack-form" onSubmit={formSubmitHandler}>
             <div className="stack-form-container-left">
               <div className="row-1">
@@ -204,6 +215,13 @@ const id = () => {
         <p>Loading...</p>
       )}
       <style jsx>{`
+        .edit-job-container {
+          max-width: 90vw;
+          margin: 2rem auto;
+        }
+        h1 {
+          padding: 0.5rem 0rem;
+        }
         .stack-form {
           display: flex;
           justify-content: space-between;

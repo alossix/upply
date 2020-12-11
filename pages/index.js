@@ -86,7 +86,7 @@ function Home() {
           max-width: 335px;
         }
         .main-section-right {
-          padding-left: 5rem;
+          padding-left: 8rem;
         }
         .job-card {
           width: 300px;
@@ -106,8 +106,10 @@ function Home() {
           color: #000;
           background-color: #fff;
         }
+        .signup-button:focus {
+          outline: none;
+        }
         .description-section {
-          // height: 35vh;
           width: 90vw;
           margin: auto;
           padding: 5rem;
@@ -122,7 +124,7 @@ function Home() {
           flex-direction: column;
           align-items: center;
           text-align: center;
-          max-width: 42vw;
+          max-width: 50vw;
         }
         .description-section-bottom {
           display: flex;

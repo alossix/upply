@@ -21,7 +21,9 @@ const indexStack = () => {
     if (user) {
       const userIdFromAuth0 = user.sub;
       axios
-        .post(`https://upply.work/api/job/fetch`, { userIdFromAuth0 })
+        // .post(`https://upply.work/api/job/fetch`, { userIdFromAuth0 })
+        // .post(`http://localhost:3000/api/job/fetch`, { userIdFromAuth0 })
+        .post(`/api/job/fetch`, { userIdFromAuth0 })
         .then((jobInfo) => {
           setJobs(jobInfo.data.data);
         });
@@ -32,7 +34,9 @@ const indexStack = () => {
     const userIdFromAuth0 = user.sub;
     event.preventDefault();
     axios
-      .post("https://upply.work/api/job", {
+      // .post("https://upply.work/api/job", {
+      // .post("http://localhost:3000/api/job", {
+      .post("/api/job", {
         bookmarked,
         jobTitle,
         companyName,
@@ -53,7 +57,6 @@ const indexStack = () => {
         setSalary("");
         setJobListingUrl("");
         setStatus("open");
-        // setBookmarked(false);
         setNotes([]);
       });
   };
@@ -70,7 +73,9 @@ const indexStack = () => {
       job.bookmarked = newBookmarkState;
       setBookmarked(newBookmarkState);
     }
-    axios.post("https://upply.work/api/job/update", {
+    // axios.post("https://upply.work/api/job/update", {
+    // axios.post("http://localhost:3000/api/job/update", {
+    axios.post("/api/job/update", {
       id,
       newBookmarkState,
     });
@@ -90,7 +95,7 @@ const indexStack = () => {
               return (
                 <div className="job-card" key={index}>
                   <div className="status-holder">
-                    <h2 className={classSetter(job)}>{job.status}</h2>
+                    <h3 className={classSetter(job)}>{job.status}</h3>
                     <img
                       className="bookmark-img"
                       src={
@@ -104,7 +109,7 @@ const indexStack = () => {
                   </div>
                   <div className="job-info-section">
                     <h2 className="status-entry">
-                      {job.jobTitle}, {job.companyName}
+                      {job.jobTitle} • {job.companyName}
                     </h2>
                     {job.jobLocation ? (
                       <div>
@@ -288,27 +293,38 @@ const indexStack = () => {
           </div>
           <style jsx>{`
             h1 {
-              padding: 0.5rem;
+              padding: 0.5rem 0rem;
             }
             h2 {
-              font-size: 1.8rem;
+              font-size: 2rem;
             }
+            h3 {
+              font-size: 1.8rem;
+              font-weight: 200;
+              text-transform: uppercase;
+            }
+
             p {
               margin: 0.25rem 0rem;
             }
             .stack-page {
               display: flex;
               flex-direction: column;
+              max-width: 90vw;
+              margin-top: 2rem;
             }
             .show-jobs-container {
-              align-items: center;
-              height: 55vh;
+              min-height: 600px;
               display: flex;
-              justify-content: space-between;
+              justify-content: flex-start;
+              align-items: flex-start;
               flex-wrap: wrap;
               border-top: 2px solid black;
               border-bottom: 2px solid black;
               overflow: auto;
+            }
+            .edit-job-container h2 {
+              margin-top: 2rem;
             }
             .stack-form {
               display: flex;
@@ -374,8 +390,6 @@ const indexStack = () => {
             .status-holder {
               display: flex;
               justify-content: space-between;
-              font-weight: 200;
-              text-transform: uppercase;
             }
             .bar {
               width: 100%;
@@ -384,9 +398,7 @@ const indexStack = () => {
               border-top-right-radius: 13px;
               color: white;
             }
-            h3 {
-              margin: 1rem 0.5rem;
-            }
+
             .job-info-section {
               padding: 1rem 1.5rem;
             }

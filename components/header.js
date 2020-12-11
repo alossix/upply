@@ -19,18 +19,23 @@ function Header({ user, loading }) {
           </li>
           {!loading &&
             (user ? (
-              <>
+              <div className="header-right">
                 <li>
                   <Link href="/user">
+                    <a className="edit-profile-link">Edit Your Profile</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/user/stack">
                     <a className="app-stack">See Your Application Stack</a>
                   </Link>
                 </li>
                 <Link href="/api/logout">
                   <a>
-                    <button>Logout</button>
+                    <button className="logout">Logout</button>
                   </a>
                 </Link>
-              </>
+              </div>
             ) : (
               <Link href="/api/login">
                 <a>
@@ -46,7 +51,10 @@ function Header({ user, loading }) {
           color: #000;
           background-color: #fff;
           box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 9px;
-          margin: 0.5rem 0rem;
+        }
+        .header-right {
+          display: flex;
+          align-items: center;
         }
         nav {
           max-width: 90vw;
@@ -55,6 +63,7 @@ function Header({ user, loading }) {
         ul {
           display: flex;
           list-style: none;
+          flex-wrap: wrap;
           justify-content: space-between;
         }
         .logo {
@@ -71,8 +80,8 @@ function Header({ user, loading }) {
           font-weight: 900;
         }
         li {
-          margin-right: 1rem;
-          font-size: 14px;
+          font-size: 1.4rem;
+          padding-right: 3rem;
         }
         li:nth-child(2) {
           margin-right: auto;
@@ -100,9 +109,8 @@ function Header({ user, loading }) {
           color: #000;
           background-color: #fff;
         }
-        .app-stack {
-          padding-left: 5rem;
-          font-size: 1.2rem;
+        button:focus {
+          outline: none;
         }
       `}</style>
     </header>
