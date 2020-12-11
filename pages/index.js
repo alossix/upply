@@ -100,7 +100,9 @@ function Home() {
         }
         @media only screen and (max-width: 800px) {
           .main-section {
+            width: 90vw;
             flex-direction: column;
+            height: 80vh;
           }
           .description-section {
             width: 90vw;
