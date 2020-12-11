@@ -45,7 +45,8 @@ function Header({ user, loading }) {
         header {
           color: #000;
           background-color: #fff;
-          box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 9px;
+          box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 9px;
+          margin: 0.5rem 0rem;
         }
         nav {
           max-width: 90vw;

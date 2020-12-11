@@ -36,8 +36,8 @@ function Home() {
           <h2>Never lose track of a job listing again</h2>
           <p>
             Upply is a <strong>card-based tracking system</strong>: Categorize,
-            sort, update and stay on top of your applications <br />
-            so you never miss out on a chance to find the perfect job.
+            sort, update and stay on top of your applications so you never miss
+            out on a chance to find the perfect&nbsp;job.
           </p>
         </div>
         <div className="description-section-bottom">
@@ -60,7 +60,7 @@ function Home() {
       </section>
       <style jsx>{`
         h1 {
-          font-size: 2.5rem;
+          font-size: 3.5rem;
         }
         h2 {
           font-size: 2rem;
@@ -72,17 +72,21 @@ function Home() {
         .main-section {
           display: flex;
           flex-direction: column;
-          flex-wrap: wrap;
           align-items: center;
           // height: 25vh;
           justify-content: center;
         }
         .main-section-top {
           display: flex;
-          margin: auto;
+          margin: 6rem auto 1rem auto;
+          justify-content: space-evenly;
+          flex-wrap: wrap;
         }
         .main-section-left {
-          width: 40%;
+          max-width: 335px;
+        }
+        .main-section-right {
+          padding-left: 5rem;
         }
         .job-card {
           width: 300px;
@@ -90,10 +94,10 @@ function Home() {
         .signup-button {
           font-weight: bold;
           color: #fff;
-          font-size: 1.4rem;
+          font-size: 2rem;
           background-color: #000;
-          padding: 0.8rem 2rem;
-          margin: 2rem 0rem;
+          padding: 1.6rem 4rem;
+          margin: 6rem 0rem;
           cursor: pointer;
           border: 3px solid black;
           border-radius: 15px;
@@ -104,10 +108,10 @@ function Home() {
         }
         .description-section {
           // height: 35vh;
-          width: 80vw;
+          width: 90vw;
           margin: auto;
-          padding: 0rem 5rem;
-          background-color: hsl(220, 60%, 97%);
+          padding: 5rem;
+          background-color: hsl(220, 60%, 91%);
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -118,31 +122,56 @@ function Home() {
           flex-direction: column;
           align-items: center;
           text-align: center;
+          max-width: 42vw;
         }
         .description-section-bottom {
           display: flex;
           flex-direction: column;
           align-items: center;
           text-align: center;
+          margin: 3rem 0rem;
         }
         .logos-container img {
           width: 50px;
           margin: 1rem;
         }
         @media only screen and (max-width: 800px) {
+          h1 {
+            font-size: 3rem;
+          }
           .main-section {
             width: 90vw;
             flex-direction: column;
             justify-content: space-around;
             // height: 60vh;
           }
+          .main-section-top {
+            display: flex;
+            flex-direction: column;
+            // margin: 1rem auto;
+          }
           .main-section-left {
-            width: 90vw;
+            max-width: 90vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+          }
+          .main-section-right {
+            display: flex;
+            justify-content: center;
+            padding-left: 0rem;
+            margin: 2rem 0rem;
+          }
+          .signup-button {
+            margin: 1rem auto 5rem auto;
           }
           .description-section {
             width: 90vw;
-            // height: 80vh;
-            padding: 0rem 1rem;
+            padding: 3rem 1rem;
+          }
+          .description-section-top {
+            max-width: 90vw;
           }
         }
       `}</style>
