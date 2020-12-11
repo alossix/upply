@@ -54,8 +54,7 @@ function Header({ user, loading }) {
         ul {
           display: flex;
           list-style: none;
-          justify-content: space-around;
-          align-items: center;
+          justify-content: space-between;
         }
         .logo {
           width: 42px;

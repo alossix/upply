@@ -57,7 +57,6 @@ function Home() {
           padding-bottom: 1rem;
         }
         h3 {
-          // padding-bottom: 1rem;
           font-size: 1.5rem;
         }
         .main-section {
@@ -98,6 +97,14 @@ function Home() {
         .logos-container img {
           width: 50px;
           margin: 1rem;
+        }
+        @media only screen and (max-width: 800px) {
+          .main-section {
+            flex-direction: column;
+          }
+          .description-section {
+            width: 90vw;
+          }
         }
       `}</style>
     </Layout>
