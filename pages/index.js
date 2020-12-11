@@ -72,12 +72,14 @@ function Home() {
         .main-section {
           display: flex;
           flex-direction: column;
+          flex-wrap: wrap;
           align-items: center;
-          height: 25vh;
+          // height: 25vh;
           justify-content: center;
         }
         .main-section-top {
           display: flex;
+          margin: auto;
         }
         .main-section-left {
           width: 40%;
@@ -85,8 +87,23 @@ function Home() {
         .job-card {
           width: 300px;
         }
+        .signup-button {
+          font-weight: bold;
+          color: #fff;
+          font-size: 1.4rem;
+          background-color: #000;
+          padding: 0.8rem 2rem;
+          margin: 2rem 0rem;
+          cursor: pointer;
+          border: 3px solid black;
+          border-radius: 15px;
+        }
+        .signup-button:hover {
+          color: #000;
+          background-color: #fff;
+        }
         .description-section {
-          height: 35vh;
+          // height: 35vh;
           width: 80vw;
           margin: auto;
           padding: 0rem 5rem;
@@ -117,14 +134,14 @@ function Home() {
             width: 90vw;
             flex-direction: column;
             justify-content: space-around;
-            height: 60vh;
+            // height: 60vh;
           }
           .main-section-left {
             width: 90vw;
           }
           .description-section {
             width: 90vw;
-            height: 80vh;
+            // height: 80vh;
             padding: 0rem 1rem;
           }
         }

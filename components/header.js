@@ -87,9 +87,9 @@ function Header({ user, loading }) {
         button {
           font-weight: bold;
           color: #fff;
-          font-size: 1.2rem;
+          font-size: 1.4rem;
           background-color: #000;
-          padding: 0.8rem 1.6rem;
+          padding: 0.8rem 2rem;
           margin: 0.5rem 0rem;
           cursor: pointer;
           border: 3px solid black;
