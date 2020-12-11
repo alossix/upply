@@ -112,8 +112,9 @@ function Home() {
           width: 90vw;
           margin: auto;
           padding: 5rem;
-          background-color: hsl(220, 60%, 91%);
+          background-color: hsl(0, 0%, 88%);
           display: flex;
+          border-radius: 15px;
           flex-direction: column;
           align-items: center;
           justify-content: space-evenly;
