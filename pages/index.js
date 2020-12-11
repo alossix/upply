@@ -104,8 +104,12 @@ function Home() {
             flex-direction: column;
             height: 80vh;
           }
+          .main-section-left {
+            width: 90vw;
+          }
           .description-section {
             width: 90vw;
+            height: 80vh;
           }
         }
       `}</style>
